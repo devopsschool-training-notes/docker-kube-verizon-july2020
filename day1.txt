@@ -1,0 +1,333 @@
+Rajesh Kumar
+=======================
+1 2 3 4 5 6 7 8 9 0 
+==========================
+8105843520
+==========================
+Start : 9:30 AM IST
+End : 6:30 PM IST
+==========================
+Lunch time - 1:00 - 2: 00
+2 Short Break -
+==========================
+Lab Env - Already Shared
+=============================================================
+2 Days - Docker + Docker Compose
+3 Days - Kubernetes
+==============================================================
+What is Docker?
+========================
+	Its a PLATFORM
+	Managing Container(s)
+	Dev by Soloman Hykes
+	Release
+		Community - Free
+		Enterprise - Paid
+	Written in Go
+
+
+What is Container?
+========================
+	Is userspace with their own
+			- net
+			- mnt
+			- process map
+			Powered by Docker with a help of Kernal.
+				Kernal has 
+					Namespaces
+					Cgroups
+					Capability 
+					which is used by docker to managae a run time env for container.
+
+==================
+in Short - 
+	Each container is independent app run time env.
+	Light weight Vms.
+
+How we run app? and Where we run app?
+		==============================================================================
+		1990s			INTERNET	2000s	       Living		2020
+		==============================================================================
+App 		Standalone				SHARED
+How many server?1					MANY			TOO MANY SERver	
+Consumer	PAYING UPFRONT				NO Payment		NO Payment			
+Platform	PHYSCIAL MACHINE			Virtual Machine		Container
+Delivery	CDs					Imm Patches		Immediate Release
+Release	Cyc*	1 Year					2 Week			1 Hour
+Soft Dev Model	Waterfall				Agile			DevOps
+Soft Dev Arch 	Monolitic				SOA			Microservices					Console					Browsers		Devices		
+
+Requirement
+==================
+- How to reduce Software Running Cost further?
+- How to reduce Software Dev Cost further?
+- How to reduce release cycle to now?
+- How to streamline of Dev - QA - OPs.
+=============================================================
+How Apps RUN? AKA What are the components needs for app to run?
+====================================
+OS -> Kernal -> 
+		Namespace(S)
+			- USER NS = USER Isolcation is Created  - Multiple
+			- NET NS = Initiate network		- 1
+			- PMAP NS = Initiate process map	- 1
+			- MNT NS = Initiate mount		- 1
+		CGROUP
+			Assigning CPU and RAM to the process.
+		Capability
+			Manages access of uSER space.
+					Root vs Non-Root
+			
+PC = Personal Computing
+Personal = 
+Computing = 
+
+=================
+Drawback of Vms.
+==========================================================================
++91 81062 70903 - SHIVA
+=======================================================================
+
+Other tools - 
+https://www.devopsschool.com/blog/list-of-top-container-runtime-interface-projects/
+
+Architecture of Docker?
+=====================================
+Human --> Docker Client ----rest ----> DockerD --> ContainerD -> RunC
+	 ---------------------------------------
+			Docker Engine
+
+
+ContainerD - https://github.com/containerd/containerd
+
+Components of Docker?
+===========================================
+Docker Engine
+	Docker Client ----rest ----> DockerD
+Docker Image
+	Combination of Files system(s)
+	Rootfs -> Userfs -> AppFs
+VMs Image
+	BOOTFS --> Rootfs -> Userfs -> AppFs
+Docker Registry
+	has repostiory
+	repo has filesystem of docker image
+	repo has versioning of filesystem
+	We get docker image from registry
+	Public
+		hub.docker.com
+		google reg
+	Pvt
+		artifactory
+		nexus
+		ecr
+Docker Container
+	Container is ONE COPY of Docker Image. Its get mounted at each container.
+	From One Image - you can create as many container.
+ 	the momnent you RUN image -
+		One container(USER NS) get created.
+			Mounted with Image
+			Assigned with network
+			Assigned with Process Map.
+	
+
+How to Install Docker?
+=====================
+Pre - 
+	You need to be a root or sudo.
+	64  bit
+- Linux 
+	centos7
+- Windows
+
+===
+13.232.232.106
+===
+https://www.devopsschool.com/tutorial/docker/install-config/index.html
+https://www.devopsschool.com/tutorial/docker/install-config/docker-install-commuityedition-centos-rhel.html
+
+    5  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    6  clear
+    7  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    8  sudo yum install –y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    9  sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
+   10  sudo yum install -y docker-ce
+   11  sudo yum install docker-ce
+   12  sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
+   13  sudo yum install -y docker-ce
+   14  sudo systemctl enable docker
+   15  sudo systemctl start docker
+   16  docker info
+   17  docker -v
+   18  docker help
+ 21  which docker
+   22  ps -eaf | grep docker
+
+Workflow of Docker Engine
+=================================
+docker run imagename
+
+Human -> Docker Client -> Docker Deamon -> Remote Registry to Download image to Local Registry -> ContainerD-> Keranl ---> Container is Created.
+
+Lifecycle of Container
+=============================
+Create -> Start -> Stop -> Restart -> Pause -> Unpause -> KILL -> Remove
+
+Lifecycle of Virutal Machine
+=============================
+Create -> Start -> Stop -> Restart -> Pause -> Unpause -> KILL -> Remove
+
+29  docker info
+   30  clear
+   31  docker images
+   32  docker pull jenkins
+   33  docker images
+   34  docker pull jenkins/jenkins
+   35  clear
+   36  docker images
+   37  docker ps
+   38  docker ps -a
+   39  docker images
+   40  docker pull jenkins/jenkins
+   41  docker pull jenkins/jenkins:2.235.1-lts-centos7
+   42  docker pull jenkins/jenkins:2.235.1-lts-centos7
+   43  clear
+   44  docker images
+   45  clear
+   46  docker ps
+   47  docker ps -a
+   48  docker create jenkins
+   49  docker ps -a
+   50  docker ps
+   51  docker ps -a
+   52  clear
+   53  docker ps -a
+   54  docker start 44bf0d2d43fd
+   55  docker ps -a
+   56  docker stop 44bf0d2d43fd
+   57  docker ps -a
+   58  docker restart 44bf0d2d43fd
+   59  docker ps -a
+   60  clear
+   61  docker pause 44bf0d2d43fd
+   62  docker ps -a
+   63  docker unpause 44bf0d2d43fd
+   64  docker ps -a
+   65  docker kill 44bf0d2d43fd
+   66  docker ps -a
+   67  docker rm 44bf0d2d43fd
+   68  docker ps -a
+   69  docker ps -a
+
+
+Select your application which you want to run in Container?
+==============================================================
+Tomcat
+Apache
+Zookeeper
+Nodejs
+Spark
+Weblogic
+Python
+Springboot
+java
+nginx
+mongodb
+rabbitmq
+mysql
+kafka
+jboss
+
+Rajesh - jenkins
+=====================
+	Java Based(Jenkins App)
+	JAVA
+	(Bootfs + ROOTFS)
+	     OS	     Image
+
+
+TIME TO PROVE IT
+======================================
+
+What is Container?
+========================
+	Is userspace with their own
+			- net
+			-  mnt [ Root fs]	
+			- process map
+			Powered by Docker with a help of Kernal.
+				Kernal has 
+					Namespaces
+					Cgroups
+					Capability 
+					which is used by docker to managae a run time env for container.
+
+
+ 89  docker ps
+   90  docker exec fc478714d2a7 ls /
+   91  clear
+   92  docker run -d jenkins
+   93  docker ps -a
+   94  docker exec 895c991df1b6 touch /tmp/rajesh1
+   95  docker exec fc478714d2a7 touch /tmp/rajesh2
+   96  docker exec 895c991df1b6 ls /tmp
+   97  docker exec fc478714d2a7 ls /tmp
+   98  clear
+   99  docker ps
+  100  docker inspect 895c991df1b6 | grep -i ip
+  101  docker inspect fc478714d2a7 | grep -i ip
+  102  clear
+  103  ps -eaf
+  104  clear
+  105  ps -eaf
+  106  clear
+  107  ls
+  108  docker ps
+  109  docker exec 895c991df1b6        jenkins             "/bin/tini -- /usr/l…                       "   3 minutes ago       Up 3 minutes        8080/tcp, 50000/tcp   admiring_mccli                       ntock
+  110  fc478714d2a7        jenkins             "/bin/tini -- /usr/l…"   9 minute                       s ago       Up 9 minutes        8080/tcp, 50000/tcp   practical_varahamihira
+  111  [root@ip-172-31-12-233 centos]# docker exec
+  112  clear
+  113  ls
+  114  docker ps
+  115  docker exec 895c991df1b6 ps -eaf
+  116  docker exec fc478714d2a7 ps -eaf
+
+======================================================
+Lab 		=  30 mins.
+1. Install Docker
+2. Container Lifecycle with Jenkins
+3. Proof of what is Container is Jenkins
+
+Demo
+==============
+Consuming a container.
+
+Assignment - 
+==============
+
+Assignment
+=================================
+Pause vs UnPause
+Stop vs Kill
+
+Assingment
+--------------------------------
+Tomcat
+Apache
+Zookeeper
+Nodejs
+Spark
+Weblogic
+Python
+Springboot
+java
+nginx
+mongodb
+rabbitmq
+mysql
+kafka
+jboss
+
+
+
+
