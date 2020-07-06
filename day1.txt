@@ -107,6 +107,10 @@ Docker Engine
 Docker Image
 	Combination of Files system(s)
 	Rootfs -> Userfs -> AppFs
+	-------------------------
+		Jenkins
+	------------------
+	ubuntu
 VMs Image
 	BOOTFS --> Rootfs -> Userfs -> AppFs
 Docker Registry
@@ -305,12 +309,157 @@ Consuming a container.
 Assignment - 
 ==============
 
-Assignment
+
+
+Lifecycle of Container
+=============================
+Create -> Start -> Stop -> Restart -> Pause -> Unpause -> KILL -> Remove
+
+
+RUN
+=====================
+docker run jenkins
+PULL + Create + Start + become
+
+docker run -d jenkins
+PULL + Create + Start + DO Not become
+
+===========================================================================
+PID 1 is Important
+===========================================================================
+Physcial Machine		Virtual			Container
+is running			is running		is running
+Coz of PID1			Coz of PID1		Coz of PID1
+
+
+PID1 is ur systemD		PID1 is ur systemD	PID1 can be anything
+							As long as "anything" is running,
+							Container is running.
+==============================================================================
+How to interact with container???
+======================================
+Human ---> using SHELL.
+
+$ docker run -it ubuntu /bin/bash
+
+How to come out of the container safly from interactive way?
+CTRL + P + Q
+=================================================
+How to consume a container? aka VM aka PM
+==============================================
+How to go inside a container?
+
+exec way - using exec command, you can execute an exectuables inside a container.
+		using -it and /bin/bash option - You can go inside it.
+
+	  179  docker exec -it  2efe732cf547 /bin/bash
+
+attach way
+	it help you get attached to PID1.
+
+
+Accessing through HTTP
+$ docker run -d jenkins
+$ docker run -d -p 8080:8080 jenkins
+$ docker run -d -p 8081:8080 jenkins
+
+  225  docker stop $(docker ps -a -q)
+  226  docker rm $(docker ps -a -q)
+  227  clear
+  228  docker ps -a
+  229  docker run -d -p 8080:8080 jenkins
+  230  docker run -d -p 8081:8080 jenkins
+  231  docker ps
+
+
+Accessing through command SSH
+	- IP
+	- Username
+	- Password
+
+======================================================================
+======================================================================
+https://www.devopsschool.com/tutorial/docker/commands/
+
+attach	Attach local standard input, output, and error streams to a running container
+
+cp	Copy files/folders between a container and the local filesystem
+ 245  docker cp devopsschool.txt e1d5ff44f716:/tmp/
+  246  docker exec e1d5ff44f716 more /tmp/devopsschool.txt
+  247  ls
+  248  rm -rf devopsschool.txt
+  249  clear
+  250  ls
+  251  docker cp e1d5ff44f716:/tmp/devopsschool.txt .
+  252  ls
+  253  more devopsschool.txt
+
+create	Create a new container
+
+diff	Inspect changes to files or directories on a container's filesystem
+	it would display 
+			CHANGED
+			ADDED
+			Deleted 
+				from a time of container created time.
+  256  docker run -itd ubuntu
+  257  docker ps
+  258  docker attach 9eefe2d7d088
+  259  clear
+  260  docker -s
+  261  clear
+  262  docker ps
+  263  docker diff 9eefe2d7d088
+
+
+exec	Run a command in a running container
+
+inspect	Return low-level information on Docker objects
+
+kill	Kill one or more running containers
+
+pause	Pause all processes within one or more containers
+
+port	List port mappings or a specific mapping for the container
+  265  clear
+  266  docker ps
+  267  docker port 9eefe2d7d088
+  268  docker port e1d5ff44f716
+  269  history
+
+
+ps	List containers
+
+rename	Rename a container
+  271  docker ps
+  272  docker rename e1d5ff44f716 webserver
+  273  docker ps
+  274  docker run -itd --name web2 ubuntu
+  275  docker ps
+  276  history
+
+restart	Restart one or more containers
+
+rm	Remove one or more containers
+
+run	Run a command in a new container
+
+start	Start one or more stopped containers
+
+stop	Stop one or more running containers
+
+unpause	Unpause all processes within one or more containers
+
+
+Assignment 1
 =================================
 Pause vs UnPause
+
+Assignment 2
+=================================
 Stop vs Kill
 
-Assingment
+Assingment 3
 --------------------------------
 Tomcat
 Apache
@@ -327,6 +476,21 @@ rabbitmq
 mysql
 kafka
 jboss
+===========================================================
+===========================================================
+
+Assingment 4
+--------------------------------
+===============================================================
+update	Update configuration of one or more containers
+wait	Block until one or more containers stop, then print their exit codes
+===============================================================
+
+
+
+
+
+
 
 
 
