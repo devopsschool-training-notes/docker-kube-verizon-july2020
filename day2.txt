@@ -134,10 +134,50 @@ docker commit -m"adding ub+up+git+ja+apc" b75d28697f6a ub-up-git-ja-apc
   119  docker images
   120  docker tag 635747a8fb1e rrr
   121  docker images
+=====================================================
+=====================================================
+=====================================================
+
+How to share images?
+----------------------
+1. Using Tar Ball
+ 128  docker images
+  129  docker save -o ub-up-git-ja-apc.tar ub-up-git-ja-apc
+  130  ls
+  131  du -sh ub-up-git-ja-apc.tar
+  132  ls
+  133  docker rmi ub-up-git-ja-apc
+  134  docker images
+  135  docker load -i ub-up-git-ja-apc.tar
+  136  docker images
+
+
+2. Using Public Repo			DONE
+	- hub.docker.com
+	- google registry
+Step 1- Register at hub.docker.com	DONE
+Step 2 - Verify your account		DONE
+Step 3 - Login to hub.docker.com and create public repo	DONE
+Step 4 - LOgin to hub.docker.com by your workstation?
+	$ docker login
+
+ 139  docker images
+  140  docker login
+  141  docker push ub-up-git-ja-apc
+  142  docker tag ub-up-git-ja-apc devopsschools/ver-demo-july
+  143  docker images
+  144  clear
+  145  docker push devopsschools/ver-demo-july
+  146  docker tag ub-up-git-ja-apc devopsschools/ver-demo-july:v1
+  147  docker images
+  148  docker push devopsschools/ver-demo-july:v1
+  149  history
 
 
 
-
+3. Using Private repo
+	- Artiactory
+	- Nexus
 
 
 
