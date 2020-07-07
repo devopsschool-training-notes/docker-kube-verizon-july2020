@@ -258,9 +258,93 @@ Assignemet:
 - Jenkins Container is running with which users?
 - Jenkins container is running with which are the port?
 
+===================================================================================
+===================================================================================
+jenkins
+	openjdk:8-jdk
+		buildpack-deps:buster-scm		
+			buildpack-deps:buster-curl
+				debian:buster	
+					scratch
+
+===================================================================
+Each line in Docker file would create one layer.
+Kind of layer
+		- Meta 	- Image
+		- Data - overlay2
+Each layer get created based on FROM image.
+
+FROM ubuntu
+MAINTAINER Rajesh Kumar DevOps@Rajeshkumar.xyz
+RUN touch /opt/ramu1.txt
+RUN touch /opt/ramu2.txt
+RUN touch /opt/ramu3.txt
 
 
 
+FROM
+MAINTAINER
+RUN
+ARG
+ENV
+VOLUME
+COPY
+USER
+EXPOSE
+==================
+Assingment - Create one image using UBUNTU
 
+CMD  Vs EntryPOINT
+==============================
+How to make PID1 in Image so we get in container?
+======================================================
+CMD 
+	WHY TO MAKE PID1
+	CMD can be replaced
+ENTRYPOINT
+	WHY TO MAKE PID1
+	ENTRYPOINT can NOT be replaced
+
+FROM ubuntu
+MAINTAINER Rajesh Kumar DevOps@Rajeshkumar.xyz
+RUN touch /opt/ramu1.txt
+CMD /bin/ls
+
+FROM ubuntu
+MAINTAINER Rajesh Kumar DevOps@Rajeshkumar.xyz
+RUN touch /opt/ramu1.txt
+ENTRYPOINT  /bin/ls
+
+
+/bin/sh -c /bin/ls
+=======================
+Mode of executions
+=================
+SHELL MODE - /bin/sh -c /bin/ls
+		/bin/bash
+EXEC MODE ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"] 
+	["/bin/bash"]
+
+
+Assigment 1
+===============================
+a Dockerfile which has 2 CMD?
+a Dockerfile which has 2 ENTRYPOINT
+a Dockerfile which one CMD and ONE ENTRYPOINT
+
+==================
+Assingment 2- Create one image using UBUNTU
+FROM
+MAINTAINER
+RUN
+ARG
+ENV
+VOLUME
+COPY
+USER
+EXPOSE
+
+Assigment 3
+https://www.devopsschool.com/tutorial/docker/dockerfile/dockerfile-example-sample-lab.html
 
 
