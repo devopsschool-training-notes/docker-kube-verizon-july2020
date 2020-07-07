@@ -180,9 +180,83 @@ Step 4 - LOgin to hub.docker.com by your workstation?
 	- Nexus
 
 
+=============================================================
+=============================================================
+=============================================================
+container are emph*
+=======================
+How can we have container data persistency???
+===========
+Sol - Docker volume
+ - volume - /var/lib/docker/volumes
+ 178  docker volume
+  179  docker volume ls
+  180  ls
+  181  clear
+  182  docker volume create dev
+  183  docker volume ls
+  184  ls
+  185  docker volume create qa
+  186  ls
+  187  docker volume ls
+  188  docker run -itd -v dev:/opt/rajesh ubuntu
+  189  docker ps
+  190  docker exec 402f98d86908 df -kh
+  191  docker attach 402f98d86908
+  192  docker exec 402f98d86908 df -kh
+  193  docker exec 402f98d86908 ls /opt/rajesh
+  194  docker stop 402f98d86908
+  195  docker rm 402f98d86908
+  196  ls
+  197  find . -name rajesh*
+  198  docker run -itd -v dev:/opt/rajesh ubuntu
+  199  docker exec 19cdcc0d9184666040369b62a155ff162a8521c0ed721e56eaf6fde92d62f40a df -kh
+  200  docker exec 19cdcc0d9184666040369b62a155ff162a8521c0ed721e56eaf6fde92d62f40a ls /opt/rajesh
+  201  docker volume
+  202  docker volume ls
+  203  docker volume prune
+  204  docker volume ls
+  205  docker volume rm dev
 
 
+ - mntfs - ANY PLACE IN HOST MACHINE
+ 209  cd /opt/
+  210  ls
+  211  mkdir backup
+  212  cd backup/
+  213  pwd
+  214  docker run -itd -v /opt/backup:/opt/raju ubuntu
+  215  pwd
+  216  touch raju1.txt
+  217  docker ps
+  218  docker exec 8c84f52962b3 ls /opt//raju
+  219  docker exec 8c84f52962b3 touch /opt/raju/raju2.txt
+  220  ls
+  221  docker stop 8c84f52962b3
+  222  docker rm 8c84f52962b3
 
+
+ - tempfs - in Memory
+
+===================================================
+Method 2 - Automatic Method	using Dockerfile
+
+
+FROM ubuntu
+MAINTAINER Rajesh Kumar DevOps@Rajeshkumar.xyz
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install git -y
+RUN apt-get install openjdk-8-jdk -y tzdata
+
+$ docker build -t image1 .
+
+
+Assignemet:
+- What is the name of Volume of Jenkins container? and where it is.
+- What is the env set in jenkins container?
+- Jenkins Container is running with which users?
+- Jenkins container is running with which are the port?
 
 
 
