@@ -84,6 +84,68 @@ events	Get real time events from the server
 
 docker events
 
+========================================================
+========================================================
+How to create images?
+---------------------
+Method 1 - Manual Method	using Container
+
+Method 2 - Automatic Method	using Dockerfile
+
+base - ubuntu		DONE
+- update		DONE
+- git			DONE
+- java			DONE
+- apache2		DONE
+
+=====================================
+docker commit -m"adding ub+up+git+ja+apc" b75d28697f6a ub-up-git-ja-apc
+
+
+  90  docker start 4855b28c6381
+   91  ls
+   92  pwd
+   93  cd ..
+   94  clear
+   95  docker stop 4855b28c6381
+   96  docker rm 4855b28c6381
+   97  cd -
+   98  clear
+   99  docker run -it ubuntu
+  100  docker ps
+  101  clear
+  102  docker images
+  103  docker commit -m"adding ub+up+git+ja+apc" b75d28697f6a ub-up-git-ja-apc
+  104  docker images
+  105  docker run -itd --name before ubuntu
+  106  docker run -itd --name after ub-up-git-ja-apc
+  107  docker exec before git
+  108  docker exec after git
+  109  clear
+  110  docker s
+  111  clear
+  112  docker ps
+  113  docker imatges
+  114  docker images
+  115  docker history ub-up-git-ja-apc
+  116  docker history ubuntu
+  117  clear
+  118  docker commit -m"adding ub+up+git+ja+apc" b75d28697f6a ub-up-git-ja-apc
+  119  docker images
+  120  docker tag 635747a8fb1e rrr
+  121  docker images
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
