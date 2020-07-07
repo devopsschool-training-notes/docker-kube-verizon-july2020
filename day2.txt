@@ -1,0 +1,90 @@
+13.233.9.170
+================================================
+Image has multiple Layers	DONE
+Each layer is file system	DONE
+each layer has UUID by Sha256	DONE
+Image - Bottom Layer is roofts	DONE
+Mulitple layers get merged by Union mounts and get attached to container as a mnt DONE
+In case of layer conflicts, top layer alwayes win DONE
+Each container gets one writeable layer DONE
+Image layer is read only. DONE
+========================================
+Where is the location of Images and Layers?
+
+Image - Meta Info
+Layer - File system
+
+$ docker info
+Docker Root Dir: /var/lib/docker
+Storage Driver: overlay2
+
+[root@ip-172-31-6-199 docker]# pwd
+/var/lib/docker
+[root@ip-172-31-6-199 docker]# ls -1
+builder
+buildkit
+containers		Container Meta info
+image			Image Meta info		
+network			Image Meta info	
+overlay2		Layers filesystem		
+plugins
+runtimes
+swarm
+tmp
+trust
+volumes
+[root@ip-172-31-6-199 docker]#
+=========================================================================
+docker inspect
+docker history
+du -h --max-depth=1
+========================================================
+
+Docker Commands - Monitoring Containers
+Command	Description
+logs	Fetch the logs of a container		PID 1 process
+ps	List containers
+stats	Display a live stream of container(s) resource usage statistics
+top	Display the running processes of a container
+events	Get real time events from the server
+
+ 171  docker ps
+  172  docker run -d jenkins
+  173  clear
+  174  ls
+  175  clear
+  176  docker ps
+  177  docker logs 45c5b0afe4ab
+  178  clear
+  179  ls
+  180  clear
+  181  dockr ps
+  182  docker ps
+  183  docker logs 4a3561fa1547
+  184  docker logs 4a3561fa1547
+  185  clear
+  186  ls
+  187  clear
+  188  docker stats
+  189  docker stats 45c5b0afe4ab
+  190  docker top
+  191  docker top 45c5b0afe4ab
+  192  docker exec 45c5b0afe4ab ps -eaf
+  193  ps -eaf | grep 9618
+  194  ps -eaf | grep 9593
+  195* ps -eaf | grep 9
+  196  clear
+  197  ps -eaf | grep 9593
+  198  kill -9 9618
+  199  ps -eaf | grep 9593
+  200  docker ps
+  201  docker ps -a
+  202  clear
+  203  ls
+
+docker events
+
+
+
+
+
