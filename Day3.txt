@@ -1,0 +1,103 @@
+k8s Clustor
+=========================
+Master
+	API Server -> POD -> Container -> Image -> G Registry
+	ETCD -> POD -> Container -> Image -> G Registry
+	ControllerMgr -> POD -> Container -> Image -> G Registry
+	Schedular -> POD -> Container -> Image -> G Registry
+
+	Kubelet
+	Docker
+	Kube Proxy
+Worker
+	Kubelet
+	Docker
+	Kube Proxy -> POD -> Container -> Image -> Registry
+==========================
+Workstation
+	Kubectl
+		YAML
+			- POD
+			- RC
+			- DEPLOY
+			- SERVICES
+
+APPLICATION 
+	POD -> Container -> Image -> Registry
+==============================================================================
+==============================================================================
+K8 Clustor - Laptop
+		ONE NODE = MASTER + WORKER == ONE VM == MINIKUBE
+https://kubernetes.io/docs/tasks/tools/install-minikube/
+
+K8 Clustor - Physical Machine (Manual)
+		Kubeadm - 
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+K8 Clustor - Virutal Machine (Manual)
+		Kubeadm - 
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+K8 Clustor - AWS - Managed - EKS
+https://aws.amazon.com/eks/
+
+K8 Clustor - Azure - Managed - AKS
+https://azure.microsoft.com/en-in/services/kubernetes-service/
+
+K8 Clustor - GC - Managed - GKE
+https://cloud.google.com/kubernetes-engine
+
+CROSS SETUP - AWS + Azure  + GC + VMWARE --> KOPS
+	https://github.com/kubernetes/kops
+
+Others - https://kubernetes.io/docs/setup/production-environment/
+======================================================
+
+Trainer machine login: username:Verizon-Trainer
+Password:P@lmeto@123
+cloudlabs.palmeto.co.in
+
+Master
+192.168.1.93
+UserId - root/root
+
+Worker
+192.168.1.92
+UserId - root/root
+
+
+How to setup k8s clustor using Kubeadm in CENTOS7?
+https://www.devopsschool.com/blog/setting-up-kubernetes-clusters-using-kubeadm-manual-way-in-rhel-7-centos7/
+
+How workstation communicate with Master?
+=========================================
+Workstation
+	Kubectl
+		- config(kube config)
+		| USER_HOME/.kube/config | CURR_DIR/.kube/config | ENV KUBECONFIG
+
+What is the content of config?
+------------------------------------
+CLUSTOR(S)
+	clustor1: https://4.5.6.7:/6443
+	clustor2: https://4.5.6.8:/6443
+	clustor3: https://4.5.6.9:/6443
+USER(S)
+	user1 - certs
+	user2 - certs
+	user3 - certs
+Context(S)
+	context1=clustor1+user3
+	context2=clustor2+user1
+	context3=clustor3+user2
+curr-context
+	context1 OR context2 OR context3 
+
+
+
+
+
+
+
+
+
