@@ -1,0 +1,178 @@
+=========================
+Desire in K8s ==> YAML/JSON ===> ApI Server
+=========================
+
+namespace
+pod
+rc
+deploy
+service
+
+   21  kubectl get nodes
+   22  kubectl get ns
+   23  kubectl get pod --all-namespaces
+   24  clear
+   25  kubectl get pod --all-namespaces -o wide
+   26  clear
+   27  history
+
+API SERVER	http://4.5.6.7:6446
+===============
+		Request
+		Format - Json
+		CRUD
+		Create - Read - Update - Delete
+		PUT/POST  GET 	POST/PUT DELETE
+			
+What are the LIST OF API?
+===============================
+  48  kubectl api-versions
+   49  kubectl api-resources
+
+
+Each API
+------
+YAML		CMD
+Kind:		shortnames/longname
+Version:
+
+------
+	CREATE
+		CMD	create [ not for all ]
+		YAML	create
+	READ		
+		CMD	get
+	Update
+		CMD	edit
+		YAML	apply
+	DELETE
+		CMD	delete
+		YAML	delete
+
+
+- Namespace
+   65  kubectl get ns
+   66  kubectl create ns rajesh
+   67  kubectl create ns dev
+   68  clear
+   69  kubectl get ns
+   70  kubectl edit ns
+   71  kubectl delete ns rajesh
+   72  kubectl get ns
+
+POD
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  labels: 
+    app: webserver
+spec:
+  containers:
+  - name: hello-ctr
+    image: nginx
+    ports:
+    - containerPort: 80
+
+IMPORTANT
+==================================
+kubectl create -h
+==================================
+
+  93  kubectl create -f pod.yaml
+   94  kubectl get pods
+   95  kubectl get pods -o wide
+   96  kubectl get pods --all-namespaces
+   97  clear
+   98  kubectl create -f pod.yaml -rajesh
+   99  kubectl create -f pod.yaml -n=rajesh
+  100  kubectl get ns
+  101  kubectl create -f pod.yaml -n=dev
+  102  kubectl get pods --all-namespaces
+  103  kubectl create -f pod.yaml -n=dev
+  104  clear
+  105  kubectl edit pod hello-pod
+  106  vi pod.yaml
+  107  kubectl apply -f pod.yaml
+  108  kubectl delete -f pod.yaml
+  109  kubectl delete pod hello-pod -n=dev
+  110  kubectl get pods --all-namespaces
+  111  history
+
+
+ 115  kubectl explain
+  116  kubectl explain pod
+  117  kubectl explain pod.spec
+  118  kubectl explain ns.spec
+  119  kubectl explain rc.spec
+  120  kubectl explain delpy.spec
+  121  kubectl explain deploy.spec
+  122  kubectl explain pod.spec
+  123  clear
+  124  kubectl explain pod.spec.containers
+=================================================
+How to consume | PLAY pod!!!!
+========================
+How to access pod on Browser?
+How to go inside pod?
+       ---------
+	wrong
+how to describe a pod?
+how to see a logs of pod?
+       ----------
+	wrong
+How to copy files inside a pod?
+       ----------
+	Wrong
+
+ 133  kubectl get pods
+  134  kubectl get pods -o wide
+  135  curl http://10.44.0.1
+  136  clear
+  137  ls
+  138  clear
+  139  kubectl
+  140  clear
+  141  kubectl get pods -o wide
+  142  kubectl exec -it hello-pod /bin/bash
+  143  clear
+  144  ls
+  145  kubectl attach hello-pod
+  146  kubectl get pods
+  147  kubectl get pods --all-namespaces
+  148  clear
+  149  ls
+  150  clear
+  151  ls
+  152  kubectl get pods --all-namespaces
+  153  history
+  154  clear
+  155  kubectl get pods
+  156  kubectl describe pod hello-pod
+  157  clear
+  158  kubectl logs hello-pod
+  159  clear
+  160  ls
+  161  kubectl exec hello-pod ls /
+  162  clear
+  163  ls
+  164  kubectl cp -h
+  165  clear
+  166  ls
+  167  kubectl cp pod.yaml hello-pod:/tml
+  168  kubectl cp pod.yaml hello-pod:/tmp
+  169  kubectl exec hello-pod ls /tmp
+  170  kubectl exec hello-pod ls /opt
+  171  kubectl exec hello-pod ls /
+  172  kubectl exec hello-pod ls /etc
+  173  clear
+  174  kubectl cp pod.yaml hello-pod:/tmp/pod.yaml
+  175  kubectl exec hello-pod ls /tmp
+  176  history
+=======================================================
+
+	
+
+
+
