@@ -249,11 +249,96 @@ spec:
   221  history
 
 
+=======================================================================
+=======================================================================
+Deployment
+=========================
+Replication	DONE
+Controller	DONE
+Versioning	DONE
+Rollout		DONE
+Rollback	DONE
+===============================
+Image v1 - https://hub.docker.com/r/scmgalaxy/nginx-devopsschoolv1
+Image v2 - https://hub.docker.com/r/scmgalaxy/nginx-devopsschoolv2
 
+kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1
 
-
-
-	
-
-
+224  kubectl create -h
+  225  kubectl create deployment -h
+  226  clear
+  227  kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1
+  228  kubectl get deploy
+  229  kubectl get pods
+  230  clear
+  231  kubectl get pods
+  232  clear
+  233  kubectl get pods
+  234  kubectl describe pod my-dep-76767c79f-th45m
+  235  clear
+  236  kubectl get pods
+  237  kubectl get deploy
+  238  kubectl edit deploy my-dep
+  239  kubectl get deploy
+  240  kubectl get pods
+  241  kubectl scale --replicas=10 deploy/my-dep
+  242  kubectl get pods
+  243  clear
+  244  kubectl get pods
+  245  clear
+  246  kubectl get pods
+  247  clear
+  248  kubectl get pods
+  249  clear
+  250  kubectl get pods
+  251  clear
+  252  kubectl get pods
+  253  clear
+  254  kubectl get pods
+  255  clear
+  256  kubectl get pods
+  257  clear
+  258  ls
+  259  kubectl get pods
+  260  kubectl delete pod my-dep-76767c79f-btt7j my-dep-76767c79f-fh7kf
+  261  kubectl get pods
+  262  clear
+  263  ls
+  264  kubectl
+  265  clear
+  266  kubectl rollout
+  267  clear
+  268  kubectl rollout history
+  269  kubectl rollout history deploy/my-dep
+  270  kubectl rollout status deploy/my-dep
+  271  kubectl edit deploy my-dep
+  272  kubectl rollout status deploy/my-dep
+  273  kubectl rollout history deploy/my-dep
+  274  clear
+  275  kubectl get pods
+  276  kubectl get pods -o wide
+  277  curl http//10.44.0.10
+  278  clear
+  279  curl http://10.44.0.10
+  280  clear
+  281  curl http://10.44.0.10
+  282  kubectl get pods -o wide
+  283  clear
+  284  kubectl get pods -o wide
+  285  curl http://10.44.0.7
+  286  curl http://10.44.0.1
+  287  clear
+  288  curl http://10.44.0.1
+  289  clear
+  290  kubectl get pods -o wide
+  291  kubectl rollout history deploy/my-dep
+  292  kubectl rollout
+  293  kubectl rollout undo -h
+  294  kubectl rollout undo deploy/my-dep --to-revision=1
+  295  kubectl rollout history deploy/my-dep
+  296  kubectl rollout status deploy/my-dep
+  297  kubectl rollout history deploy/my-dep
+  298  kubectl get pods -o wide
+  299  curl http://10.44.0.5
+  300  history
 
