@@ -171,6 +171,87 @@ How to copy files inside a pod?
   175  kubectl exec hello-pod ls /tmp
   176  history
 =======================================================
+====================================================================
+1 Pod === KIND Pod.
+===================================
+Many Pod ====???
+=======================
+- ReplicationController
+- Deployment		[IMPORTANT]
+- DeamonSets [ASSIGNMENT]
+- StatefullSets [ASSIGNMENT]
+===================================
+ReplicationController
+
+Replication - Replicate 1 to Many POD.
+Controller - It would control(monitor) THAT MANY POD all the time. Keep a check of it.
+
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hello-rc
+spec:
+  replicas: 2   
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-ctr
+        image: nginx
+        ports:
+        - containerPort: 80
+
+
+
+
+ 182  ls
+  183  vi rc.yaml
+  184  kubectl get rc
+  185  kubectl get rc -n-dev
+  186  kubectl create -f rc.yaml
+  187  kubectl get rc -n-dev
+  188  kubectl get rc
+  189  clear
+  190  kubectl get pods
+  191  kubectl get rc
+  192  kubectl get pods
+  193  clear
+  194  kubectl get pods
+  195  clear
+  196  kubectl get pods
+  197  kubectl edit rc hello-rc
+  198  kubectl get pods
+  199  clear
+  200  kubectl get pods
+  201  vi rc.yaml
+  202  kubectl get pods
+  203  kubectl apply -f rc.yaml
+  204  kubectl get pods
+  205  vi rc.yaml
+  206  kubectl apply -f rc.yaml
+  207  kubectl get pods
+  208  kubectl
+  209  kubectl scale -h
+  210  kubectl scale --replicas=5 rc/hello-rc
+  211  kubectl get pods
+  212  kubectl describe pod hello-rc-h9h2k
+  213  clear
+  214  ls
+  215  kubectl get pods
+  216  kubectl delete rc hello-rc-m8cfs
+  217  kubectl delete pod hello-rc-m8cfs
+  218  kubectl get pods
+  219  kubectl delete -f rc.yaml
+  220  kubectl get pods
+  221  history
+
+
+
+
+
 
 	
 
