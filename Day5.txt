@@ -381,5 +381,16 @@ kubectl config set-credentials employee --client-certificate=/home/ec2-user/user
 
 Reference
 https://github.com/devopsschool-training-notes/Certified-Kubernetes-Administrator/blob/master/april-2020-batch/31-may-2020.txt
+================
+Tutorials - https://www.devopsschool.com/tutorial/
+Blogs - https://www.devopsschool.com/blog
+Videos - https://www.devopsschool.com/videos
+	https://www.devopsschool.com/video
+Notes	https://www.devopsschool.com/blog/devopsschool-github-referenece/
+Sample program	https://www.devopsschool.com/blog/devopsschool-github-referenece/
+Slides - 
+		https://www.devopsschool.com/pdf
+		https://www.devopsschool.com/slides
 
-
+How to reach out to me?
+- devops@Rajeshkumar.xyz
