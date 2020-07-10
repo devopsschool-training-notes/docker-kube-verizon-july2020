@@ -144,7 +144,242 @@ kubectl expose deploy my-dep --port=8080 --target-port=80 --type=LoadBalancer --
   553  kubectl expose deploy my-dep --port=8080 --target-port=80 --type=LoadBalancer --name=lb
   554  kubectl get svc
   555  history
+====================================================================
+====================================================================
+Storage
+================
+Storage Interface
+===================
+
+Container -> POD -> Kubernetes --> Storage Interface --> Physical Storage
+============================================================================
+Ops			-> Would create volume and keep it available in K8s.
+Enginerring 		- Would use that vol and mount at POD --> You can use in the cont.
 
 
+Types of Volumes
+================================
+awsElasticBlockStore
+azureDisk
+azureFile
+cephfs
+cinder
+configMap
+csi
+downwardAPI
+emptyDir
+fc (fibre channel)
+flexVolume
+flocker
+gcePersistentDisk
+gitRepo (deprecated)
+glusterfs
+hostPath
+iscsi
+local
+nfs
+persistentVolumeClaim
+projected
+portworxVolume
+quobyte
+rbd
+scaleIO
+secret
+storageos
+vsphereVolume
+=============================
+hostPath
+https://www.devopsschool.com/blog/persistentvolume-persistentvolumeclaim-volumes-using-hostpath/
+
+Action with Ops
+========================
+Ops			-> Would create volume and keep it available in K8s.
+- PV = PersistentVolume
+
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: hostpath
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/devopsschool"
+
+
+
+
+Enginerring 		- Would use that vol and mount at POD --> You can use in the cont.
+- PVC 
+- USING in POD
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvchostpath
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: task-pv-pod
+spec:
+  containers:
+    - name: task-pv-container
+      image: scmgalaxy/nginx-devopsschoolv1
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: pvchostpath
+
+
+35.154.246.78
+
+ 558  kubectl get nodes
+  559  ls
+  560  vi pv.yaml
+  561  kubectl get pv
+  562  kubectl apply -f pv.yaml
+  563  kubectl get pv
+  564  clear
+  565  vi pvc.yaml
+  566  kubectl get pvc
+  567  kubectl get pv
+  568  kubectl apply -f pvc.yaml
+  569  vi pvc.yaml
+  570  kubectl apply -f pvc.yaml
+  571  kubectl get pvc
+  572  kubectl get pv
+  573  clear
+  574  ls
+  575  kubectl get pvc
+  576  clear
+  577  ls
+  578  pvcpod.yaml
+  579  vi pvcpod.yaml
+  580  kubectl  apply -f pvcpod.yaml
+  581  kubectl get pods
+  582  kubectl exec task-pv-pod ls /usr/share/nginx/html
+  583  clear
+  584  kubectl exec task-pv-pod touch /usr/share/nginx/html/rrrr
+  585  clear
+  586  kubectl delete pod task-pv-pod
+===================================================================
+Kubernetes Authentication and Authorization
+===============================================
+Authentication  - How to get into kubernetes
+- cert
+Authorization - What I am Authorized to do?
+- RBAC
+
+ROLE BASED ACCESS CONTROl
+-----------------------------------------
+TYPES OF USERS
+	NORMAL			CAN NOT BE CREATED THROUGH API.
+	ServiceAccount		API
+
+Types of Roles 
+	Role			DONE
+	ClustorRole		DONE
+
+Types of Binding
+	RoleBinding		DONE
+	ClustorRoleBinding	DONE
+
+TYPE OF ACCESS VERB
+https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+
+=====================================================
+How to add a normal user and grant his access to k8s clustor?
+1. Generate a user PUB and PVT
+2. using Pvt file, generate csr
+3. Send csr to k8 admin to approve csr to get cert key
+4. Admin would add user to Role or Clustor role using RoleBinding or ClusterRoleBinding.
+5. Set "cert key" and pvt key to inside kube config file.
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  namespace: office
+  name: deployment-manager
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "replicasets", "pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
+
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: deployment-manager-binding
+  namespace: office
+subjects:
+- kind: User
+  name: employee
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: deployment-manager
+  apiGroup: ""
+
+kubectl config set-credentials employee --client-certificate=/home/ec2-user/user/employee.crt  --client-key=/home/ec2-user/user/employee.key
+
+  594  kubectl create namespace office
+  595  openssl genrsa -out employee.key 2048
+  596  ls
+  597  openssl req -new -key employee.key -out employee.csr -subj "/CN=employee/O=bitnami"
+  598  ls
+  599  owd
+  600  pwd
+  601  sudo openssl x509 -req -in /home/ec2-user/user/employee.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out /home/ec2-user/user/employee.crt -days 500
+  602  clear
+  603  ls
+  604  rm -rf employee.csr
+  605  clear
+  606  kubectl config set-credentials employee --client-certificate=/home/ec2-user/user/employee.crt  --client-key=/home/ec2-user/user/employee.key
+  607  more ~/.kube/config
+  608  clear
+  609  kubectl config set-context employee-context --cluster=kubernetes --namespace=office --user=employee
+  610  kubectl --context=employee-context get pods
+  611  clear
+  612  ls
+  613  vi role.pem
+  614  kubectl apply -f role.pem
+  615  kubectl get roles
+  616  kubectl get role
+  617  kubectl get role -n=office
+  618  vi rb.yaml
+  619  kubectl apply -f rb.yaml
+  620  kubectl get rolebinding
+  621  kubectl get rolebinding -n=offie
+  622  kubectl get rolebinding -n=office
+  623  clear
+  624  kubectl --context=employee-context get pods
+  625  kubectl --context=employee-context get svc
+  626  history
+
+Reference
+https://github.com/devopsschool-training-notes/Certified-Kubernetes-Administrator/blob/master/april-2020-batch/31-may-2020.txt
 
 
