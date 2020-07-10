@@ -73,11 +73,13 @@ kubectl create service clusterip my-cs --tcp=5678:80
 
 Available Commands:
   clusterip    Create a ClusterIP service.		[default]
+  nodeport     Create a NodePort service.	
   externalname Create an ExternalName service.
   loadbalancer Create a LoadBalancer service.
-  nodeport     Create a NodePort service.
 
-
+clusterip = Create a SVC(LB) on Pod network
+nodeport = Create a SVC(LB) on Pod network + exposed at NODE Port
+loadbalancer = Create a SVC(LB) on Pod network + exposed at NODE Port + Map NodePort at Ext LB.
 
 Assignment
 ================
@@ -86,5 +88,63 @@ What is this?
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   18d
 [ec2-user@ip-172-31-23-196 ~]$
+
+=====================================================================
+=====================================================================
+
+kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1
+kubectl expose deploy my-dep --port=8080 --target-port=80
+
+
+  520  ls
+  521  kubectl create deployment my-dep --image=scmgalaxy/nginx-devopsschoolv1
+  522  kubectl get deplpy
+  523  kubectl get deploy
+  524  kubectl scale --replicas=5 deploy/my-dep
+  525  clear
+  526  l
+  527  clear
+  528  ls
+  529  kubectl get pods --show-labels
+  530  kubectl expose
+  531  kubectl expose -h
+  532  clear
+  533  kubectl expose deploy my-dep --port=8080 --target-port=80
+  534  kubectl get svc
+  535  curl http://10.108.70.247:8080
+  536  kubectl describe svc my-dep
+  537  clear
+
+
+kubectl expose deploy my-dep --port=8080 --target-port=80
+kubectl expose deploy my-dep --port=8080 --target-port=80 --type=NodePort --name=nodesvc
+
+--port=8080 = SVC Port
+--target-port=80 = Container Port
+NodePort- Exposed Default
+
+  543  clear
+  544  kubectl expose deploy my-dep --port=8080 --target-port=80 --type=NodePort
+  545  clear
+  546  kubectl expose deploy my-dep --port=8080 --target-port=80 --type=NodePort --name=nodesvc
+  547  kubectl get svc
+  548  curl http://10.102.228.28:8080
+  549  curl http://13.127.75.62:31109/
+  550  history
+
+kubectl expose deploy my-dep --port=8080 --target-port=80 --type=LoadBalancer --name=lb
+
+
+
+ 548  curl http://10.102.228.28:8080
+  549  curl http://13.127.75.62:31109/
+  550  history
+  551  kubectl expose -h
+  552  clear
+  553  kubectl expose deploy my-dep --port=8080 --target-port=80 --type=LoadBalancer --name=lb
+  554  kubectl get svc
+  555  history
+
+
 
 
