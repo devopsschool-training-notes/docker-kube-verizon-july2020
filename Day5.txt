@@ -1,0 +1,90 @@
+What is Services?
+=====================
+	its a loadbalancer on POD network Balancing POD(S)
+	Its managed services
+				----MASTER------	-------WORKER---------------
+Human(YAML) ---> Kubectl 	-> APISERVER	->	Kubelet		- PODS
+				- ETCD			- docker 	
+				- Schedular		- proxy
+				- Controllermgr
+			
+
+END USER???
+====================================================
+13.127.75.62
+
+ 465  kubectl decribe node ip-172-31-26-2.ap-south-1.compute.internal
+  466  kubectl describe node ip-172-31-26-2.ap-south-1.compute.internal
+  467  clear
+  468  ls
+  469  histor
+  470  clear
+  471  history
+  472  clear
+  473  kubectl taint nodes ip-172-31-26-2.ap-south-1.compute.internal server=web:NoSchedule-
+  474  kubectl describe node ip-172-31-26-2.ap-south-1.compute.internal
+  475  clear
+  476  ls
+  477  kubectl get pods
+  478  kubectl get pods -o wide
+  479  kubectl get pods -o wide --show-lables
+  480  kubectl get pods -o wide --show-labels
+  481  clear
+  482  kubectl create -h
+  483  kubectl create service -h
+  484  CLEAR
+  485  clear
+  486  kubectl create service clusterip -h
+ 486  kubectl create service clusterip -h
+  487  cler
+  488  clear
+  489  history
+  490  clear
+  491  kubectl create service clusterip my-cs --tcp=5678:80
+  492  kubectl get svc
+  493  kubectl describe svc my-cs
+  494  clear
+  495  ls
+  496  kubectl get svc --show-lables
+  497  kubectl get svc --show-labels
+  498  kubectl get pods --show-labels
+  499* curl http://
+  500  kubectl get pods --show-labels -o wide
+  501  curl http://10.44.0.1
+  502  kubectl get svc --show-labels
+  503  kubectl edit pod taint-demo
+  504  clear
+  505  kubectl get pods --show-labels -o wide
+  506  kubectl get svc --show-labels
+  507  curl http://10.101.76.250
+  508  curl http://10.101.76.250:5678
+  509  kubectl describe svc my-cs
+  510  kubectl edit svc my-cs
+  511  kubectl describe svc my-cs
+  512  curl http://10.101.76.250:5678
+  513  kubectl edit svc my-cs
+  514  kubectl describe svc my-cs
+  515  curl http://10.101.76.250:5678
+  516  kubectl edit pod taint-demo
+  517  curl http://10.101.76.250:5678
+
+
+kubectl create service clusterip my-cs --tcp=5678:80
+
+Available Commands:
+  clusterip    Create a ClusterIP service.		[default]
+  externalname Create an ExternalName service.
+  loadbalancer Create a LoadBalancer service.
+  nodeport     Create a NodePort service.
+
+
+
+Assignment
+================
+What is this?
+[ec2-user@ip-172-31-23-196 ~]$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   18d
+[ec2-user@ip-172-31-23-196 ~]$
+
+
